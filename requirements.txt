@@ -1,5 +1,6 @@
-﻿streamlit
+streamlit
 scikit-learn
 pandas
 numpy
 requests
+gdown
