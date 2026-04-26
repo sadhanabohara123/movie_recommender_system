@@ -2,6 +2,8 @@ import streamlit as st
 import pickle
 import pandas as pd
 import requests
+import gdown
+import os
 
 
 def fetch_poster(movie_id):
@@ -25,7 +27,10 @@ def recommend(movie):
         recommended_movies_poster.append(fetch_poster(movie_id))
     return recommended_movies,recommended_movies_poster
 movies_dict=pickle.load(open('movies_dict.pkl','rb'))
-similarity=pickle.load(open('similarity.pkl','rb'))
+if not os.path.exists('similarity.pkl'):
+    gdown.download(f'https://drive.google.com/file/d/1sDz74pISfC9GSAMRil15mR6sxR2KPVep/view?usp=sharing', 'similarity.pkl', quiet=False)
+
+similarity = pickle.load(open('similarity.pkl','rb'))
 movies=pd.DataFrame(movies_dict)
 st.title('Movies Recommender System')
 selected_movie_name=st.selectbox(
